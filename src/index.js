@@ -16,6 +16,10 @@ const io = new Server(httpServer, { cors: { origin: "*" } });
 
 io.on("connection", (socket) => {
   console.log("Hello user ", socket.id);
+
+  socket.on("msg_send", (data) => {
+    io.emit("msg_rev", data);
+  });
 });
 
 app.use("/", express.static(__dirname + "/public"));
