@@ -35,8 +35,8 @@ io.on("connection", (socket) => {
 });
 
 app.set("view engine", "ejs");
-app.use("/", express.static(__dirname + "/public"));
-app.get("/chats/:id", async (req, res) => {
+
+app.get("/:id", async (req, res) => {
   const chats = await Chat.find({
     roomId: req.params.id,
   });
