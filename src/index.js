@@ -20,7 +20,6 @@ io.on("connection", (socket) => {
   });
 
   socket.on("msg_send", async (data) => {
-    console.log(data);
     const chat = await Chat.create({
       content: data.msg,
       userId: data.name,
@@ -28,6 +27,10 @@ io.on("connection", (socket) => {
     });
     io.to(data.id).emit("msg_rev", data);
     console.log("data ", data);
+  });
+
+  socket.on("typing", (data) => {
+    socket.broadcast.to(data.id).emit("some_typing");
   });
 });
 

@@ -23,6 +23,7 @@
 
       <h1 id="roomId" data-id="<%=id%>"></h1>
 
+      <span id="spanId">Typing...</span>
 
       <input class="pt-1 mt-1" type="text" placeholder="Enter name" id="name">
       <input class="pt-1 mt-1" placeholder="Enter message" id="newMsg" type="text">
@@ -32,15 +33,17 @@
       <script src="/socket.io/socket.io.js"></script>
       <script>
             var socket = io();
+            let recievedId= null
+            let typingId =null
             let btn = document.getElementById("btn");
             let btn1 = document.getElementById("btn1");
             let inputMsg1 = document.getElementById("newMsg");
             let inputMsg2 = document.getElementById("name");
             let inputList = document.getElementById("msgList");
-
+            let spanId = document.getElementById("spanId")
             let id = document.getElementById("roomId");
 
-
+            spanId.style.display ="none"
             socket.emit("join_room", {
                 id: id.getAttribute("data-id"),
             });
@@ -55,10 +58,27 @@
 
             socket.on("msg_rev", (data) => {
               let limsg = document.createElement("li");
-              console.log("data ",);
               limsg.innerText = `${data.name}:${data.msg}`;
               inputList.append(limsg);
             });
+
+            socket.on("some_typing",(data) =>{
+                  spanId.style.display="block"
+                  clearTimeout(recievedId)
+                  recievedId = setTimeout(() => {
+                        spanId.style.display ="none"
+                  }, 1000);
+            })
+            inputMsg1.addEventListener("keypress",function (e) {
+                  console.log("press");
+                  socket.emit("typing",{
+                        id:id.getAttribute("data-id"),
+                  })
+                  clearTimeout(typingId)
+                  typingId=setTimeout(() => {
+                        spanId.style.display="none"
+                  }, 1000);
+            })
 
       </script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
