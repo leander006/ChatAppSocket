@@ -5,18 +5,29 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Welcome to tutorial of web sockets</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
-<body>
+<body class="container">
       
       <h1 style="color: blue;">Welcome to tutorial of web sockets </h1>
-      <ul id="msgList">
 
+      
+      <ul style="height:400px;color:black ; padding-bottom: 20px; background-color: rgb(194, 240, 238); list-style: none;" class="overflow-y-scroll p-1" id="msgList">
+            <!-- <% for(let count = 0; count <= 100; count++ ){ %>
+                  <br><%= count %>
+                <%#  will output the numbers 1-100 %>
+            <% } %> -->
       </ul>
-      <input id="newMsg" type="text">
 
-      <button id="btn" style="border: 30px; border-radius: 40px; padding: 20px; color: black; background-color: rgb(43, 226, 202); cursor: pointer;" type="submit">Submit</button>
+      <input type="text" placeholder="Enter id" id="roomId">
+      <button style="border:30px; border-radius: 40px; padding: 4px; color: black; background-color: rgb(43, 226, 202); cursor: pointer;" type="submit" type="submit" id="btn1">Send</button>
+      <input type="text" placeholder="Enter name" id="name">
+      <input class="pt-1 mt-1 w-" placeholder="Enter message" id="newMsg" type="text">
+
+      <button id="btn" style="border:30px; border-radius: 40px; padding: 4px; color: black; background-color: rgb(43, 226, 202); cursor: pointer;" type="submit">Submit</button>
 
       <script src="/socket.io/socket.io.js"></script>
       <script src="script.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>
